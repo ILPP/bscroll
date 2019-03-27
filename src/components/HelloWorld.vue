@@ -1,13 +1,16 @@
 <template>
-  <scroll class="wrapper"
+  <div>
+    <p>第一次成功的better-scroll</p>
+    <scroll class="wrapper"
           :data="data"
           :pulldown="pulldown"
           @pulldown="loadData">
-    <ul class="content">
-      <li v-for="item in data">{{item}}</li>
-    </ul>
-    <div class="loading-wrapper"></div>
-  </scroll>
+      <ul class="content">
+        <li v-for="item in data">{{item}}</li>
+      </ul>
+      <div class="loading-wrapper"></div>
+    </scroll>
+  </div>
 </template>
 <script>
   import BScroll from 'better-scroll'
@@ -17,59 +20,24 @@
       return {
         data: [],
         pulldown: true,
-        list: [
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-          '我是第一条数据',
-        ]
+        list: [],
+        num: 0,
       }
     },
     created() {
       this.loadData()
     },
-    conponents: {
+    components: {
       scroll
     },
     methods: {
       loadData() {
-        this.data.concat(this.list)
+        alert(this.num)
+        for(var i = 0; i < 20;i++) {
+          this.list.push(`我是第${this.num}数据`)
+        }
+        this.data = this.data.concat(this.list)
+        this.num++
       }
     }
   }
@@ -78,13 +46,21 @@
 
 <style type="text/css" scoped>
   p {
-    height: 30px;
-    font-size: 24px;
-    line-height: 30px;
-    text-align: center;
-    padding: 10px 0;
+    height: 60px;
+    margin: 0;
+    padding: 0;
   }
-  .wrap {
-    max-height: 100vh;
+  .content li {
+    margin: 10px 0;
+  }
+  .wrapper {
+    position: fixed;
+    z-index: 1;
+    top: 60px;
+    bottom: 50px;
+    left: 0;
+    width: 100%;
+    background: #ccc;
+    overflow: hidden;
   }
 </style>

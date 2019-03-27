@@ -75,6 +75,7 @@
       }
     },
     mounted() {
+        console.log(this.pulldown)
       // 保证在DOM渲染完毕后初始化better-scroll
       setTimeout(() => {
         this._initScroll()
@@ -89,7 +90,8 @@
         this.scroll = new BScroll(this.$refs.wrapper, {
           probeType: this.probeType,
           click: this.click,
-          scrollX: this.scrollX
+          scrollX: this.scrollX,
+          pulldown: this.pulldown
         })
 
         // 是否派发滚动事件
@@ -112,6 +114,7 @@
         // 是否派发顶部下拉事件，用于下拉刷新
         if (this.pulldown) {
           this.scroll.on('touchend', (pos) => {
+            console.log(pos.y)
             // 下拉动作
             if (pos.y > 50) {
               this.$emit('pulldown')
